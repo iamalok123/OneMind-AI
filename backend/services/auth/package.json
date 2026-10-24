@@ -11,15 +11,18 @@
   "keywords": [],
   "type": "module",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "dotenv": "^18.0.8",
     "express": "^5.3.0",
     "express-http-proxy": "^2.1.2",
     "firebase": "^13.1.0",
     "firebase-admin": "^14.5.0",
+    "ioredis": "^6.0.0",
     "mongoose": "^9.11.3",
     "nodemon": "^3.1.14"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
     "@types/express-http-proxy": "^1.6.7",
     "@types/node": "^26.6.5",
