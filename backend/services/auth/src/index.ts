@@ -3,13 +3,14 @@ import dotenv from "dotenv"
 dotenv.config()
 
 import connectDB from "./config/db.js"
+import router from "./routes/auth.route.js"
 
 const port = process.env.PORT || 8001
 
 const app = express()
+app.use(express.json())
 
-// Connect to MongoDB
-connectDB()
+app.use("/", router)
 
 app.get("/", (req: Request, res: Response) => {
     res.json({ message: "hello from auth" })
@@ -17,4 +18,5 @@ app.get("/", (req: Request, res: Response) => {
 
 app.listen(port, () => {
     console.log(`auth started at ${port}`)
+    connectDB()
 })
