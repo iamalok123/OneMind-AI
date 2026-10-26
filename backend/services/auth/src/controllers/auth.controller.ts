@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { getAuth } from "firebase-admin/auth";
 import { app } from "../config/firebase.js";
 import User from "../models/user.model.js";
-import redis from "../config/redis.js";
+import redis, { getSessionKey } from "@onemind/shared/redis";
 
 export const login = async (req: Request, res: Response) => {
     try {
@@ -30,7 +30,7 @@ export const login = async (req: Request, res: Response) => {
         }
 
         const sessionId = crypto.randomUUID()
-        await redis.set(`Session - ${sessionId}`, JSON.stringify({
+        await redis.set(getSessionKey(sessionId), JSON.stringify({
             userId: user._id,
             name: user.name,
             email: user.email,
@@ -69,7 +69,7 @@ export const logOut = async (req: Request, res: Response) => {
             });
         }
 
-        await redis.del(`Session - ${sessionId}`);
+        await redis.del(getSessionKey(sessionId));
         res.clearCookie("session-id", {
             httpOnly: true,
             secure: false,

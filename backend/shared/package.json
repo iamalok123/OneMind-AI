@@ -1,0 +1,32 @@
+{
+  "name": "@onemind/shared",
+  "version": "1.0.0",
+  "description": "Shared modules across OneMind AI microservices",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./redis": {
+      "types": "./dist/redis/redis.d.ts",
+      "import": "./dist/redis/redis.js",
+      "default": "./dist/redis/redis.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.8",
+    "ioredis": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^5.9.3"
+  }
+}
