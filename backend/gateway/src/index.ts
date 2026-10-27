@@ -20,8 +20,11 @@ app.use(cookieParser())
 
 const authService = process.env.AUTH_SERVICE || "http://localhost:8001"
 const chatService = process.env.CHAT_SERVICE || "http://localhost:8002"
+const agentService = process.env.AGENT_SERVICE || "http://localhost:8003"
+
 app.use("/api/auth", proxy(authService))
 app.use("/api/chat", protect, proxyWithHeader(chatService))
+app.use("/api/agent", protect, proxyWithHeader(agentService))
 app.get("/api/me", protect, getCurrentUser)
 
 
