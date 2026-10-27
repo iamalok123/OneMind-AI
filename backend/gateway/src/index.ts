@@ -5,6 +5,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import { protect } from "./middleware/auth.middleware.js"
 import { getCurrentUser } from "./controllers/user.controller.js"
+import { proxyWithHeader } from "./utils/proxyWithHeader.js"
 dotenv.config()
 
 const port = process.env.PORT || 8000
@@ -18,14 +19,16 @@ app.use(cors({
 app.use(cookieParser())
 
 const authService = process.env.AUTH_SERVICE || "http://localhost:8001"
+const chatService = process.env.CHAT_SERVICE || "http://localhost:8002"
 app.use("/api/auth", proxy(authService))
+app.use("/api/chat", protect, proxyWithHeader(chatService))
 app.get("/api/me", protect, getCurrentUser)
 
 
 app.get("/", (req: Request, res: Response) => {
-    res.json({ message: "hello from gateway" })
+    res.json({ message: "Hello from gateway" })
 })
 
 app.listen(port, () => {
-    console.log(`gateway started at ${port}`)
+    console.log(`Gateway started at ${port}`)
 })
