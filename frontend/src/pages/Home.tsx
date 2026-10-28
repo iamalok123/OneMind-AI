@@ -9,6 +9,7 @@ import { setUserdata } from "../store/userSlice"
 import Sidebar from "../components/Sidebar"
 import Chat from "../components/Chat"
 import Artifact from "../components/Artifact"
+import Logo from "../components/Logo"
 
 const Home = () => {
     const [loading, setLoading] = useState(false)
@@ -44,24 +45,13 @@ const Home = () => {
                 {/* Center Auth Container */}
                 <div className='w-full max-w-95 flex flex-col items-center'>
 
-                    {/* Minimalist Monochrome Logo Mark */}
-                    <div className='w-12 h-12 rounded-full bg-white flex items-center justify-center mb-6 shadow-md shadow-black/40'>
-                        <svg
-                            className='w-6 h-6 text-black'
-                            viewBox='0 0 24 24'
-                            fill='none'
-                            stroke='currentColor'
-                            strokeWidth='2'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                        >
-                            <circle cx='12' cy='12' r='9' />
-                            <circle cx='12' cy='12' r='4' />
-                            <line x1='12' y1='3' x2='12' y2='8' />
-                            <line x1='12' y1='16' x2='12' y2='21' />
-                            <line x1='3' y1='12' x2='8' y2='12' />
-                            <line x1='16' y1='12' x2='21' y2='12' />
-                        </svg>
+                    {/* OneMind AI Logo */}
+                    <div className='relative mb-6 flex items-center justify-center'>
+                        {/* Ambient backlight glow */}
+                        <div className='absolute -inset-3 bg-white/10 rounded-full blur-xl pointer-events-none' />
+                        <div className='w-16 h-16 rounded-2xl bg-[#141414] border border-white/12 flex items-center justify-center shadow-2xl shadow-black/80 relative transition-transform duration-200 hover:scale-105'>
+                            <Logo className='w-9 h-9 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.25)]' />
+                        </div>
                     </div>
 
                     {/* Main Auth Card */}

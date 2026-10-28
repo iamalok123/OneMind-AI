@@ -1,3 +1,4 @@
+import Logo from "./Logo";
 import { Check, Coins, LogOut, MessageSquare, MoreHorizontal, PanelLeftIcon, Pencil, PenSquare, Plus, Trash2, User, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -135,6 +136,7 @@ const Sidebar = () => {
                 {/* Header */}
                 <div className='flex items-center justify-between px-2 py-2 border-b border-white/6'>
                     <div className='flex items-center gap-2'>
+                        <Logo className='w-5 h-5 text-white shrink-0' />
                         <span className='text-[15px] font-semibold text-white tracking-tight'>
                             OneMind AI
                         </span>
