@@ -40,15 +40,38 @@ export const getConversations = async (req: Request, res: Response) => {
 
 export const updateConversationTitle = async (req: Request, res: Response) => {
     try {
-        const {conversationId, title} = req.body
+        const { conversationId, title } = req.body
+        if (!conversationId || !title) {
+            return res.status(400).json({ error: "conversationId and title are required" })
+        }
         const conversation = await Conversation.findByIdAndUpdate(
             conversationId, 
-            {title: title}, 
-            {new: true}
+            { title }, 
+            { new: true }
         )
+        if (!conversation) {
+            return res.status(404).json({ error: "Conversation not found" })
+        }
         return res.status(200).json(conversation)
     } catch (error: any) {
         return res.status(500).json({ error: `Update conversation ${error}` })
+    }
+}
+
+export const deleteConversation = async (req: Request, res: Response) => {
+    try {
+        const conversationId = req.params.conversationId || req.body.conversationId
+        if (!conversationId) {
+            return res.status(400).json({ error: "Conversation Id is required" })
+        }
+        const conversation = await Conversation.findByIdAndDelete(conversationId)
+        if (!conversation) {
+            return res.status(404).json({ error: "Conversation not found" })
+        }
+        await Message.deleteMany({ conversationId })
+        return res.status(200).json({ message: "Conversation deleted successfully", conversationId })
+    } catch (error: any) {
+        return res.status(500).json({ error: `Delete conversation ${error}` })
     }
 }
 

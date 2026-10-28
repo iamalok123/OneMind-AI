@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import Home from "./pages/Home"
-import getCurrentUser from "./features/getCurrentUser"
+import { getCurrentUser } from "./api/getCurrentUser"
 import { useDispatch } from "react-redux"
 import { setUserdata } from "./store/userSlice"
 
@@ -17,7 +17,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className="w-full min-h-screen bg-[#0d0d0d]">
+    <div className="w-full h-screen bg-[#000000] overflow-hidden">
       <Home />
     </div>
   )

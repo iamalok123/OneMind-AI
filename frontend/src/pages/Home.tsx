@@ -6,6 +6,9 @@ import { FcGoogle } from "react-icons/fc"
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/store"
 import { setUserdata } from "../store/userSlice"
+import Sidebar from "../components/Sidebar"
+import Chat from "../components/Chat"
+import Artifact from "../components/Artifact"
 
 const Home = () => {
     const [loading, setLoading] = useState(false)
@@ -35,10 +38,10 @@ const Home = () => {
         }
     }
 
-    return (
-        <div className='min-h-screen w-full flex flex-col items-center justify-center bg-[#0d0d0d] text-[#ececec] select-none px-4 py-12'>
-            {!userData ? (
-                /* Center Auth Container */
+    if (!userData) {
+        return (
+            <div className='min-h-screen w-full flex flex-col items-center justify-center bg-[#000000] text-[#ececec] select-none px-4 py-12'>
+                {/* Center Auth Container */}
                 <div className='w-full max-w-95 flex flex-col items-center'>
 
                     {/* Minimalist Monochrome Logo Mark */}
@@ -103,23 +106,15 @@ const Home = () => {
                     </div>
 
                 </div>
-            ) : (
-                <div className='flex flex-col items-center text-center gap-3'>
-                    {userData.avatar && (
-                        <img
-                            src={userData.avatar}
-                            alt={userData.name || 'User'}
-                            className='w-16 h-16 rounded-full border border-neutral-700 shadow-md'
-                        />
-                    )}
-                    <h1 className='text-2xl font-semibold text-white'>
-                        Welcome{userData.name ? `, ${userData.name}` : ""}!
-                    </h1>
-                    {userData.email && (
-                        <p className='text-sm text-neutral-400'>{userData.email}</p>
-                    )}
-                </div>
-            )}
+            </div>
+        )
+    }
+
+    return (
+        <div className='w-full h-screen overflow-hidden flex bg-[#000000] text-[#ececec] select-none'>
+            <Sidebar />
+            <Chat />
+            <Artifact />
         </div>
     )
 }
